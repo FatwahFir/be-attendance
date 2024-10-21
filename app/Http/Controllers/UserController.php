@@ -9,7 +9,7 @@ class UserController extends Controller
 {
     public function getUsers()
     {
-        $users = User::with('userDetails')->get();
+        $users = User::with('userDetails', 'userDetails.location')->get();
         $res = [
             'status' => 'success',
             'message' => 'success get data',
