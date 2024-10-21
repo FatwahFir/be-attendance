@@ -15,7 +15,7 @@ class AttendanceController extends Controller
             'long' => 'required|numeric',
         ]);
 
-        $attendance = Attendance::create($request->all());
+        $attendance = Attendance::create($request->all()+['type'=>'in']);
 
         $res = [
             'status' => 'success',

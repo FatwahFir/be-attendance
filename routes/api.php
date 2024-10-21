@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\AppConfigController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\UserDetailController;
 
@@ -30,6 +31,9 @@ Route::get('/locations', [LocationController::class, 'getLocations']);
 
 Route::post('/attendances', [AttendanceController::class, 'createAttendance']);
 Route::get('/attendances', [AttendanceController::class, 'getAttendance']);
+
+Route::put('/app-config', [AppConfigController::class, 'update']);
+
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
