@@ -24,40 +24,15 @@ class UserSeeder extends Seeder
                 'user_id' => $admin->id,
                 'name' => 'Admin User',
                 'phone' => '081234567890',
-                'address' => '123 Admin St, Admin City, Admin Country', // Dummy address for Admin
+                'address' => '123 Admin St, Admin City, Admin Country', 
             ]);
     
             $usersData = [
-                [
-                    'username' => 'user1',
-                    'name' => 'Regular User 1',
-                    'phone' => '089876543211',
-                    'address' => '456 User St, User City, User Country', // Dummy address for User 1
-                ],
-                [
-                    'username' => 'user2',
-                    'name' => 'Regular User 2',
-                    'phone' => '089876543212',
-                    'address' => '789 User St, User City, User Country', // Dummy address for User 2
-                ],
-                [
-                    'username' => 'user3',
-                    'name' => 'Regular User 3',
-                    'phone' => '089876543213',
-                    'address' => '101 User St, User City, User Country', // Dummy address for User 3
-                ],
-                [
-                    'username' => 'user4',
-                    'name' => 'Regular User 4',
-                    'phone' => '089876543214',
-                    'address' => '202 User St, User City, User Country', // Dummy address for User 4
-                ],
-                [
-                    'username' => 'user5',
-                    'name' => 'Regular User 5',
-                    'phone' => '089876543215',
-                    'address' => '303 User St, User City, User Country', // Dummy address for User 5
-                ],
+                ['username' => 'user1', 'name' => 'John Smith', 'phone' => '089876543211', 'address' => '456 User St, User City, User Country'],
+                ['username' => 'user2', 'name' => 'Emily Johnson', 'phone' => '089876543212', 'address' => '789 User St, User City, User Country'],
+                ['username' => 'user3', 'name' => 'Michael Brown', 'phone' => '089876543213', 'address' => '101 User St, User City, User Country'],
+                ['username' => 'user4', 'name' => 'Sophia Davis', 'phone' => '089876543214', 'address' => '202 User St, User City, User Country'],
+                ['username' => 'user5', 'name' => 'James Wilson', 'phone' => '089876543215', 'address' => '303 User St, User City, User Country'],
             ];
     
             foreach ($usersData as $userData) {

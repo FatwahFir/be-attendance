@@ -17,14 +17,20 @@ class AttendanceSeeder extends Seeder
     {
         $faker = Faker::create();
         $year = date('Y'); 
-        $months = range(1, 10);
-        $userIds = [1, 2, 3, 4, 5];
+        $months = range(1, 10); 
+        $userIds = [1, 2, 3, 4, 5]; 
+        $today = now();
 
         foreach ($months as $month) {
             $entries = rand(20, 60);
 
             $startDate = "{$year}-{$month}-01";
-            $endDate = date("Y-m-t", strtotime($startDate)); 
+
+            if ($month == $today->month) {
+                $endDate = $today->copy()->subDay()->format('Y-m-d'); 
+            } else {
+                $endDate = date("Y-m-t", strtotime($startDate)); 
+            }
 
             for ($i = 0; $i < $entries; $i++) {
                 DB::table('attendances')->insert([
