@@ -83,6 +83,8 @@ class AttendanceController extends Controller
                     'message' => $validator->messages()->first(),
                 ], 400);
             }
+            $maxRadius = AppConfig::first()->pluck('max_radius');
+
 
             $today = Carbon::now()->toDateString();
 
@@ -106,6 +108,7 @@ class AttendanceController extends Controller
 
             return response()->json([
                 'status' => $status,
+                'max_radius' => $maxRadius,
                 'message' => $message,
             ], 200);
 
@@ -140,12 +143,9 @@ class AttendanceController extends Controller
                 ->whereDate('created_at', Carbon::today())
                 ->get();
 
-            $maxRadius = AppConfig::first()->pluck('max_radius');
-
             if ($todayAttendance->isEmpty()) {
                 return response()->json([
                     'status' => 'success',
-                    'max_radius' => $maxRadius,
                     'message' => 'No attendance data for today',
                     'data' => []
                 ], 200);
@@ -153,7 +153,6 @@ class AttendanceController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'max_radius' => $maxRadius,
                 'message' => 'Attendance data for today fetched successfully',
                 'data' => $todayAttendance
             ], 200);
