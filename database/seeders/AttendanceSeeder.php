@@ -16,13 +16,15 @@ class AttendanceSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        $year = date('Y'); // Menggunakan tahun ini
-        $months = range(1, 10); // Dari Januari sampai Oktober
-        $userIds = [1, 2, 3, 4, 5]; // User ID dari 1-5
+        $year = date('Y'); 
+        $months = range(1, 10);
+        $userIds = [1, 2, 3, 4, 5];
 
         foreach ($months as $month) {
-            // Tentukan berapa banyak data yang akan di-generate (20-60 data per bulan)
             $entries = rand(20, 60);
+
+            $startDate = "{$year}-{$month}-01";
+            $endDate = date("Y-m-t", strtotime($startDate)); 
 
             for ($i = 0; $i < $entries; $i++) {
                 DB::table('attendances')->insert([
@@ -30,7 +32,7 @@ class AttendanceSeeder extends Seeder
                     'lat' => $faker->latitude,
                     'long' => $faker->longitude,
                     'type' => 'in',
-                    'created_at' => $faker->dateTimeBetween("{$year}-{$month}-01", "{$year}-{$month}-t"),
+                    'created_at' => $faker->dateTimeBetween($startDate, $endDate),
                     'updated_at' => now(),
                 ]);
             }
