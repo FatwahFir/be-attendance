@@ -13,7 +13,7 @@ class LocationController extends Controller
         try {
             $validator = Validator::make($request->all(),[
                 'admin_id' => 'required|exists:users,id',
-                'name' => 'required|unique:location',
+                'name' => 'required|unique:locations',
                 'lat' => 'required|numeric',
                 'long' => 'required|numeric',
             ]);

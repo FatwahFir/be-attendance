@@ -13,7 +13,7 @@ class AuthController extends Controller
         $credentials = $request->only('username', 'password');
 
         if (Auth::attempt($credentials)) {
-            $user = Auth::user();
+            $user = Auth::user()->load('userDetails', 'userDetails.location');
             return response()->json(['message' => 'Login successful', 'user' => $user], 200);
         }
 

@@ -31,6 +31,7 @@ Route::get('/locations', [LocationController::class, 'getLocations']);
 
 Route::post('/attendances', [AttendanceController::class, 'createAttendance']);
 Route::get('/attendances', [AttendanceController::class, 'getAttendance']);
+Route::get('/attendances/status', [AttendanceController::class, 'checkAttendanceStatus']);
 
 Route::put('/app-config', [AppConfigController::class, 'update']);
 
