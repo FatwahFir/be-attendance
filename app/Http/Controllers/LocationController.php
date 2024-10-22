@@ -16,6 +16,7 @@ class LocationController extends Controller
                 'name' => 'required|unique:locations',
                 'lat' => 'required|numeric',
                 'long' => 'required|numeric',
+                'max_radius' => 'required|numeric',
             ]);
     
             if ($validator->fails()) {
