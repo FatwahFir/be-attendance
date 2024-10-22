@@ -131,5 +131,34 @@ class AttendanceController extends Controller
 
         return response()->json($res, 200);
     }
+
+    public function getTodayAttendance($userId)
+    {
+        try {
+            $todayAttendance = Attendance::where('user_id', $userId)
+                ->whereDate('created_at', Carbon::today())
+                ->get();
+
+            if ($todayAttendance->isEmpty()) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'No attendance data for today',
+                    'data' => []
+                ], 200);
+            }
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Attendance data for today fetched successfully',
+                'data' => $todayAttendance
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Internal server error',
+                'error' => $th->getMessage(),
+            ], 500);
+        }
+    }
 }
 

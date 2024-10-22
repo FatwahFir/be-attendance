@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Location;
-use App\Models\Attendance;
 use App\Models\AppConfig;
+use App\Models\Attendance;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -20,6 +22,25 @@ class HomeController extends Controller
 
             $maxRadius = AppConfig::select('max_radius')->first();
 
+            $currentYear = Carbon::now()->year;
+
+            $attendanceData = Attendance::select(
+                    DB::raw("MONTHNAME(created_at) as month"),
+                    DB::raw("COUNT(*) as count")
+                )
+                ->whereYear('created_at', $currentYear)
+                ->where('type', 'in')
+                ->groupBy(DB::raw("MONTHNAME(created_at)"))
+                ->orderBy(DB::raw("MONTH(created_at)"))
+                ->get();
+
+            $attendanceByMonth = $attendanceData->map(function ($item) {
+                return [
+                    'x' => $item->month,
+                    'y' => $item->count
+                ];
+            });
+
             return response()->json([
                 'status' => 'success',
                 'message' => 'Data fetched successfully',
@@ -28,6 +49,7 @@ class HomeController extends Controller
                     'location_count' => $locationCount,
                     'attendance_count' => $attendanceCount,
                     'max_radius' => $maxRadius ? $maxRadius->max_radius : null,
+                    'recap' => $attendanceByMonth,
                 ],
             ], 200);
         } catch (\Throwable $th) {
@@ -39,3 +61,4 @@ class HomeController extends Controller
         }
     }
 }
+

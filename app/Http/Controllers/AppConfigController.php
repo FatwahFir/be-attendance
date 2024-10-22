@@ -32,7 +32,7 @@ class AppConfigController extends Controller
     
             return response()->json([
                 'success' => true,
-                'message'=> 'Radius maksimal diubah!',
+                'message'=> 'Max radius changed!',
                 'data' => $config,
             ]);
         } catch (\Throwable $th) {
