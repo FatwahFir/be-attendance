@@ -83,7 +83,7 @@ class AttendanceController extends Controller
                     'message' => $validator->messages()->first(),
                 ], 400);
             }
-            $maxRadius = AppConfig::first()->pluck('max_radius');
+            $maxRadius = AppConfig::pluck('max_radius')->first();
 
 
             $today = Carbon::now()->toDateString();
