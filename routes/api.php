@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\AppConfigController;
@@ -23,6 +24,8 @@ use App\Http\Controllers\UserDetailController;
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/users', [UserController::class, 'getUsers']);
+
+Route::get('/home', [HomeController::class, 'index']);
 
 Route::post('/user/set-location', [UserDetailController::class, 'setUserLocation']);
 
